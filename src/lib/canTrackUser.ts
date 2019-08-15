@@ -1,4 +1,4 @@
-import countryRequiresGdprNotice from './countryRequiresGdprNotice';
+import isGdprCountry from './isGdprCountry';
 
 interface StringHash {[key: string]: string}
 
@@ -26,10 +26,20 @@ function acknowledge(): void {
   cookie.setKey(ACKNOWLEDGEMENT_KEY);
 }
 
-export async function acknowledgeGdprNotice(showNotice: () => Promise<void>): Promise<void> {
-  if (acknowledged() || !await countryRequiresGdprNotice()) {
-    return Promise.resolve();
-  } 
+interface Params {
+  notice: () => Promise<void>;
+  register: () => void;
+}
 
-  return showNotice().then(acknowledge);
+export async function acknowledgeGdprNotice({notice, register}: Params): Promise<boolean> {
+  if (acknowledged()) {
+    register();
+    return Promise.resolve(true);
+  }
+  if (await isGdprCountry()) {
+    return Promise.resolve(false);
+  }
+
+  register();
+  return notice().then(acknowledge).then(() => true);
 }

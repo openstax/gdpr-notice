@@ -1,1 +1,1 @@
-export * from './lib/acknowledgeGdprNotice';   
+export * from './lib/canTrackUser';   
