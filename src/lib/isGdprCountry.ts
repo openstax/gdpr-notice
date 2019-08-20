@@ -39,7 +39,7 @@ const excludedCountries = {
   SE: 'Sweden',
   SI: 'Slovenia',
   SK: 'Slovakia',
-  YT: 'Mayotte',
+  YT: 'Mayotte'
 };
 
 export default function checkCountry(): Promise<boolean> {

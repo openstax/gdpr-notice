@@ -1,1 +1,1 @@
-export * from './lib/canTrackUser';   
+export * from './lib/canTrackUser';

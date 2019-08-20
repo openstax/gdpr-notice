@@ -1,19 +1,21 @@
 import isGdprCountry from './isGdprCountry';
 
-interface StringHash {[key: string]: string}
+interface StringHash {
+  [key: string]: string;
+}
 
 const cookie = {
   get hash(): StringHash {
     return decodeURIComponent(document.cookie)
       .split('; ')
       .reduce<StringHash>((a, b) => {
-          const [key, val] = b.split('=');
-          a[key] = val;
-          return a;
+        const [key, val] = b.split('=');
+        a[key] = val;
+        return a;
       }, {});
   },
   setKey(key: string): void {
-      document.cookie = `${key}=true; expires=Tue, 19 Jan 2038 03:14:07 GMT`;
+    document.cookie = `${key}=true; expires=Tue, 19 Jan 2038 03:14:07 GMT`;
   }
 };
 
@@ -31,7 +33,10 @@ interface Params {
   register: () => void;
 }
 
-export async function acknowledgeGdprNotice({notice, register}: Params): Promise<boolean> {
+export async function acknowledgeGdprNotice({
+  notice,
+  register
+}: Params): Promise<boolean> {
   if (acknowledged()) {
     register();
     return Promise.resolve(true);
@@ -41,5 +46,7 @@ export async function acknowledgeGdprNotice({notice, register}: Params): Promise
   }
 
   register();
-  return notice().then(acknowledge).then(() => true);
+  return notice()
+    .then(acknowledge)
+    .then(() => true);
 }
