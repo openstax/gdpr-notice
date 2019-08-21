@@ -47,6 +47,24 @@ test("doesn't check location if previously acknowledged", async t => {
   t.false(isGdprCountry.called);
 });
 
+test("requsests notice and register when outisde gdpr country", async t => {
+  const { notice, register } = stubs();
+  acknowledged.returns(false);
+  isGdprCountry.returns(Promise.resolve(false));
+  await canTrackUser({ notice, register });
+  t.true(notice.called);
+  t.true(register.called);
+});
+
+test("doesn't request notice or register inside gdpr country", async t => {
+  const { notice, register } = stubs();
+  acknowledged.returns(false);
+  isGdprCountry.returns(Promise.resolve(true));
+  await canTrackUser({ notice, register });
+  t.false(notice.called);
+  t.false(register.called);
+});
+
 test('acknowledges after notice is resolved', async t => {
   const { register } = stubs();
   let resolve: undefined | (() => void);
