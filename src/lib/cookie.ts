@@ -13,11 +13,12 @@ const cookie = {
       }, {});
   },
   setKey(key: string): void {
-    document.cookie = `${key}=true; expires=Tue, 19 Jan 2038 03:14:07 GMT`;
+    document.cookie = `${key}=true; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
   }
 };
 
 const ACKNOWLEDGEMENT_KEY = 'cookie_notice_acknowledged';
+
 export function acknowledged(): boolean {
   return !!cookie.hash[ACKNOWLEDGEMENT_KEY];
 }
