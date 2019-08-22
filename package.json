@@ -1,11 +1,11 @@
 {
-  "name": "cookie-notice",
+  "name": "user-tracking-notice",
   "version": "1.0.0",
   "description": "manages country lookup and acknowledged cookie",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/TomWoodward/gdpr-notice",
+  "repository": "https://github.com/openstax/user-tracking-notice",
   "license": "MIT",
   "keywords": [],
   "scripts": {
