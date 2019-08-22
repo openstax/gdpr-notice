@@ -1,1 +1,1 @@
-export * from './lib/canTrackUser';
+export { default } from "./lib/canTrackUser"
