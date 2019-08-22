@@ -42,7 +42,7 @@ const excludedCountries = {
   YT: 'Mayotte'
 };
 
-export default function checkCountry(): Promise<boolean> {
+export default function isGdprCountry(): Promise<boolean> {
   return fetch('http://ip-api.com/json')
     .then(response => response.json())
     .then(response => response.countryCode in excludedCountries);
