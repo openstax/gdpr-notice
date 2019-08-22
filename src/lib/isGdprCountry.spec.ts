@@ -2,15 +2,19 @@ import test from 'ava';
 import sinon from 'sinon';
 import isGdprCountry from './isGdprCountry';
 
-const mockResponse = (countryCode: string) => Promise.resolve({
-  json: () => Promise.resolve({
-    countryCode
-  })
-});
+const mockResponse = (countryCode: string) =>
+  Promise.resolve({
+    json: () =>
+      Promise.resolve({
+        countryCode
+      })
+  });
 
 let fetchSpy: sinon.SinonSpy;
 const stubFetch = (countryCode: string) =>
-  (global as any).fetch = fetchSpy = sinon.fake.returns(mockResponse(countryCode));
+  ((global as any).fetch = fetchSpy = sinon.fake.returns(
+    mockResponse(countryCode)
+  ));
 
 test('returns false when it should', async t => {
   stubFetch('CA');
